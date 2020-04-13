@@ -4,17 +4,35 @@ export const REMOVE_TODO = "REMOVE_TODO";
 export const COMPLETE_TODO = "COMPLETE_TODO";
 
 // Actions Creator
-export const createTodo = (text) => ({
+export const createTodo = (todo) => ({
   type: CREATE_TODO,
-  payload: { text },
+  payload: { todo },
 });
 
-export const removeTodo = (text) => ({
+export const removeTodo = (todo) => ({
   type: REMOVE_TODO,
-  payload: { text },
+  payload: { todo },
 });
 
-export const completeTodo = (text) => ({
+export const completeTodo = (todo) => ({
   type: COMPLETE_TODO,
-  payload: { text },
+  payload: { todo },
+});
+
+// Thunk Actions
+export const LOAD_TODOS_INPROGRESS = "LOAD_TODOS_INPROGRESS";
+export const loadTodosInprogress = () => ({
+  type: LOAD_TODOS_INPROGRESS,
+});
+
+export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
+export const loadTodosSuccess = (todos) => ({
+  type: LOAD_TODOS_SUCCESS,
+  payload: { todos },
+});
+
+export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
+export const loadTodosFailure = (error) => ({
+  type: LOAD_TODOS_FAILURE,
+  payload: error,
 });

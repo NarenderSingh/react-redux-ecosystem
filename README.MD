@@ -6,3 +6,5 @@ npm install --save-dev webpack webpack-cli webpack-dev-server css-loader style-l
 npm install --save-dev react-hot-loader<br/>
 npm install redux react-redux<br/>
 npm install redux-persist<br/>
+npm install redux-thunk redux-devtools-extension @babel/runtime<br/>
+npm install --save-dev @babel/plugin-transform-runtime<br/>
