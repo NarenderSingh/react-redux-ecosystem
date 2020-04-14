@@ -7,6 +7,7 @@ import {
   removeTodoRequest,
   completeTodoRequest,
 } from "../redux/thunk";
+import { getTodos, getTodosLoading } from "../redux/selector";
 
 const TodoList = ({
   todos = [],
@@ -40,8 +41,8 @@ const TodoList = ({
 };
 
 const mapStateToProps = (state) => ({
-  todos: state.todos,
-  isLoading: state.isloading,
+  todos: getTodos(state),
+  isLoading: getTodosLoading(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
