@@ -8,3 +8,4 @@ npm install redux react-redux<br/>
 npm install redux-persist<br/>
 npm install redux-thunk redux-devtools-extension @babel/runtime<br/>
 npm install --save-dev @babel/plugin-transform-runtime<br/>
+npm install reselect<br/>

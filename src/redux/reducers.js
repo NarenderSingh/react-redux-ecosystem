@@ -7,51 +7,55 @@ import {
   LOAD_TODOS_FAILURE,
 } from "./actions";
 
-export const todos = (state = [], action) => {
+const initialState = {
+  isLoading: false,
+  data: [],
+};
+
+export const todos = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case CREATE_TODO: {
       const { todo } = payload;
-      return state.concat(todo);
+      return { ...state, data: state.data.concat(todo) };
     }
     case REMOVE_TODO: {
       // Rename or alias
       const { todo: todoToRemove } = payload;
       console.log("Reducer", todoToRemove);
-      return state.filter((todo) => todo.id !== todoToRemove.id);
+      return {
+        ...state,
+        data: state.data.filter((todo) => todo.id !== todoToRemove.id),
+      };
     }
     case COMPLETE_TODO: {
       const { todo: todoComplete } = payload;
       console.log("Reducer", todoComplete);
-      return state.map((todo) => {
-        if (todo.id === todoComplete.id) {
-          return todoComplete;
-        }
-        return todo;
-      });
+      return {
+        ...state,
+        data: state.data.map((todo) => {
+          if (todo.id === todoComplete.id) {
+            return todoComplete;
+          }
+          return todo;
+        }),
+      };
     }
     case LOAD_TODOS_SUCCESS: {
       const { todos } = payload;
-      return todos;
+      return {
+        ...state,
+        isLoading: false,
+        data: todos,
+      };
     }
     case LOAD_TODOS_INPROGRESS:
-    case LOAD_TODOS_FAILURE:
-    default:
-      return state;
-  }
-};
-
-export const isLoading = (state = false, action) => {
-  const { type } = action;
-
-  switch (type) {
-    case LOAD_TODOS_INPROGRESS: {
-      return true;
-    }
-    case LOAD_TODOS_SUCCESS:
     case LOAD_TODOS_FAILURE: {
-      return false;
+      return {
+        ...state,
+        isLoading: false,
+      };
     }
     default:
       return state;

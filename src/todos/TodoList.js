@@ -7,11 +7,18 @@ import {
   removeTodoRequest,
   completeTodoRequest,
 } from "../redux/thunk";
-import { getTodos, getTodosLoading } from "../redux/selector";
+import {
+  getTodos,
+  getTodosLoading,
+  getCompletedTodos,
+  getIncompleteTodos,
+} from "../redux/selector";
 
 const TodoList = ({
   todos = [],
   isloading,
+  completedTodos,
+  inCompletedTodos,
   onRemovePressed,
   onCompletePressed,
   startLoadingTodos,
@@ -26,7 +33,18 @@ const TodoList = ({
     <div className="card card-body">
       <NewTodoForm />
       <hr />
-      {todos.map((todo, i) => (
+      <h3>Incomplete :</h3>
+      {inCompletedTodos.map((todo, i) => (
+        <TodoListItem
+          key={i}
+          todo={todo}
+          onRemovePressed={onRemovePressed}
+          onCompletePressed={onCompletePressed}
+        />
+      ))}
+      <hr />
+      <h3>Completed :</h3>
+      {completedTodos.map((todo, i) => (
         <TodoListItem
           key={i}
           todo={todo}
@@ -41,7 +59,9 @@ const TodoList = ({
 };
 
 const mapStateToProps = (state) => ({
-  todos: getTodos(state),
+  // todos: getTodos(state),
+  completedTodos: getCompletedTodos(state),
+  inCompletedTodos: getIncompleteTodos(state),
   isLoading: getTodosLoading(state),
 });
 
